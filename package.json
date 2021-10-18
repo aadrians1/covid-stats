@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "got": "^11.8.2",
+    "imgur": "^1.0.2",
     "puppeteer": "^10.4.0"
   }
 }
