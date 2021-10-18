@@ -9,9 +9,9 @@
   "author": "WobbyChip",
   "license": "ISC",
   "dependencies": {
+    "canvas": "^2.8.0",
     "got": "^11.8.2",
     "imgur": "^1.0.2",
-    "pastebin-js": "^1.0.6",
     "puppeteer": "^10.4.0"
   }
 }
