@@ -41,7 +41,7 @@ async function GetCovidStats(country) {
             document.execCommand("insertText", false, country);
             await new Promise(resolve => setTimeout(resolve, 500));
             var element = document.querySelectorAll("div.D51jpe.hzhyof:not([style='display: none;']")[0];
-            if (element.getAttribute("data-ddt") == "CONFIRMED_CASES") { return null; }
+            if (element.getAttribute("data-ddt") == "CONFIRMED_CASES") { return "CONFIRMED_CASES"; }
             element.click();
 
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -64,7 +64,7 @@ async function GetCovidStats(country) {
             while (base64 == null) { await new Promise(resolve => setTimeout(resolve, 5)); }
             return base64;
         } catch (e) {
-            return null;
+            return "error";
         }
     }, country);
 
