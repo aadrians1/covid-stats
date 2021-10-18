@@ -6,6 +6,9 @@ const imgur = require('imgur');
 
 (async () => {
     var res = await GetCovidStats('latvia');
+    console.log(res);
+    return;
+
     if (res != null && res.startsWith("data:")) {
         imgur.setClientId('8d3813e6a4f69d7');
         imgur.uploadBase64(res.replace('data:image/png;base64,', ''))
@@ -47,11 +50,11 @@ async function GetCovidStats(country) {
         try {
             document.querySelectorAll(".jyfHyd")[1].click();
             await new Promise(resolve => setTimeout(resolve, 500));
-            document.querySelectorAll('.AlKDIb')[1].click();
-            await new Promise(resolve => setTimeout(resolve, 500));
-            document.querySelectorAll(".UbwB7c")[1].focus();
-            await new Promise(resolve => setTimeout(resolve, 500));
-            document.execCommand("insertText", false, country);
+            //document.querySelectorAll('.AlKDIb')[1].click();
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //document.querySelectorAll(".UbwB7c")[1].focus();
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //document.execCommand("insertText", false, country);
             //await new Promise(resolve => setTimeout(resolve, 500));
             //var element = document.querySelectorAll("div.D51jpe.hzhyof:not([style='display: none;']")[0];
             //if (element.getAttribute("data-ddt") == "CONFIRMED_CASES") { return "CONFIRMED_CASES"; }
@@ -63,20 +66,32 @@ async function GetCovidStats(country) {
             //document.querySelectorAll(".D51jpe.hzhyof")[2].click();
 
             //await new Promise(resolve => setTimeout(resolve, 500));
-            var script = document.createElement("script");
-            var base64 = null;
+            //var script = document.createElement("script");
+            //var base64 = null;
 
-            script.onload = function () {
+            //script.onload = function () {
                 //html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
-                    html2canvas(document.querySelector("body")).then(canvas => {
-                    base64 = canvas.toDataURL("image/png");
-                });
-            };
+                    //html2canvas(document.querySelector("body")).then(canvas => {
+                    //base64 = canvas.toDataURL("image/png");
+                //});
+            //};
 
-            script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+            //script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+            //document.head.appendChild(script);
+            //while (base64 == null) { await new Promise(resolve => setTimeout(resolve, 5)); }
+            //return base64;
+
+            var script = document.createElement('script');
+            var result = null;
+    
+            script.onload = function () {
+                result = $(".PDn9ad.iiUHhf")[0].outerHTML;
+            };
+    
+            script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
             document.head.appendChild(script);
-            while (base64 == null) { await new Promise(resolve => setTimeout(resolve, 5)); }
-            return base64;
+            //console.log(result);
+            return result;
         } catch (e) {
             return "error";
         }
