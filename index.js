@@ -90,6 +90,7 @@ async function GetCovidStats(country) {
     
             script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
             document.head.appendChild(script);
+            while (result == null) { await new Promise(resolve => setTimeout(resolve, 5)); }
             //console.log(result);
             return result;
         } catch (e) {
