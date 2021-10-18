@@ -54,14 +54,14 @@ async function GetCovidStats(country) {
     
                 //Set period to 2 weeks
                 document.querySelector("[data-per='LAST_14_DAYS']").click();
-                resolve(document.querySelector("[data-per='LAST_14_DAYS']").outerHTML);
                 await new Promise(resolve => setTimeout(resolve, 1000));
     
                 //Take screenshot of graph
                 var script = document.createElement("script");
     
                 script.onload = function () {
-                    html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
+                    //html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
+                    html2canvas(document.querySelector("body")).then(canvas => {
                         resolve(canvas.toDataURL("image/png"));
                     });
                 };
