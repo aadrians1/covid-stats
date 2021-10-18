@@ -1,10 +1,23 @@
 const got = require('got');
 const puppeteer = require('puppeteer');
+const imgur = require('imgur');
 
 
 
 (async () => {
-    console.log(await GetCovidStats('latvia'));
+    var res = await GetCovidStats('latvia');
+    if (res != null && res.startsWith("data:")) {
+        imgur.setClientId('8d3813e6a4f69d7');
+        imgur.uploadBase64(res.replace('data:image/png;base64,', ''))
+                .then((json) => {
+                    console.log(json.link);
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                });
+    } else {
+        console.log(res);
+    }
     //process.exit();
 })();
 
@@ -34,27 +47,28 @@ async function GetCovidStats(country) {
         try {
             document.querySelectorAll(".jyfHyd")[1].click();
             await new Promise(resolve => setTimeout(resolve, 500));
-            document.querySelectorAll('.AlKDIb')[1].click();
-            await new Promise(resolve => setTimeout(resolve, 500));
-            document.querySelectorAll(".UbwB7c")[1].focus();
-            await new Promise(resolve => setTimeout(resolve, 500));
-            document.execCommand("insertText", false, country);
-            await new Promise(resolve => setTimeout(resolve, 500));
-            var element = document.querySelectorAll("div.D51jpe.hzhyof:not([style='display: none;']")[0];
-            if (element.getAttribute("data-ddt") == "CONFIRMED_CASES") { return "CONFIRMED_CASES"; }
-            element.click();
+            //document.querySelectorAll('.AlKDIb')[1].click();
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //document.querySelectorAll(".UbwB7c")[1].focus();
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //document.execCommand("insertText", false, country);
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //var element = document.querySelectorAll("div.D51jpe.hzhyof:not([style='display: none;']")[0];
+            //if (element.getAttribute("data-ddt") == "CONFIRMED_CASES") { return "CONFIRMED_CASES"; }
+            //element.click();
 
-            await new Promise(resolve => setTimeout(resolve, 500));
-            document.querySelectorAll(".AlKDIb")[2].click();
-            await new Promise(resolve => setTimeout(resolve, 500));
-            document.querySelectorAll(".D51jpe.hzhyof")[2].click();
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //document.querySelectorAll(".AlKDIb")[2].click();
+            //await new Promise(resolve => setTimeout(resolve, 500));
+            //document.querySelectorAll(".D51jpe.hzhyof")[2].click();
 
-            await new Promise(resolve => setTimeout(resolve, 500));
+            //await new Promise(resolve => setTimeout(resolve, 500));
             var script = document.createElement("script");
             var base64 = null;
 
             script.onload = function () {
-                html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
+                //html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
+                    html2canvas(document.querySelector("body")).then(canvas => {
                     base64 = canvas.toDataURL("image/png");
                 });
             };
