@@ -62,8 +62,8 @@ async function GetCovidStats(country) {
                 var script = document.createElement("script");
     
                 script.onload = function () {
-                    //html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
-                    html2canvas(document.querySelector("body")).then(canvas => {
+                    html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
+                    //html2canvas(document.querySelector("body")).then(canvas => {
                         resolve(canvas.toDataURL("image/png"));
                     });
                 };
