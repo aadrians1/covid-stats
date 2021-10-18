@@ -1,4 +1,3 @@
-const got = require('got');
 const puppeteer = require('puppeteer');
 const imgur = require('imgur');
 
@@ -35,7 +34,7 @@ async function GetCovidStats(country) {
             //"--no-zygote",
         ],
         defaultViewport: null,
-        headless: true,
+        headless: false,
     });
 
     const page = await browser.newPage();
@@ -45,16 +44,17 @@ async function GetCovidStats(country) {
 
     var result = await page.evaluate(async function() {
         return await new Promise(async resolve => {
-            try {
-                //Return if no graph found
-                if (!document.querySelector(".PDn9ad.iiUHhf")) { resolve("No graph"); }
-    
+            try {    
                 //Agree to terms
                 document.querySelectorAll(".jyfHyd")[1].click();
                 await new Promise(resolve => setTimeout(resolve, 500));
+
+                //Return if no graph found
+                if (!document.querySelector(".PDn9ad.iiUHhf")) { resolve("No graph"); }
     
                 //Set period to 2 weeks
                 document.querySelector("[data-per='LAST_14_DAYS']").click();
+                resolve(document.querySelector("[data-per='LAST_14_DAYS']").outerHTML);
                 await new Promise(resolve => setTimeout(resolve, 1000));
     
                 //Take screenshot of graph
