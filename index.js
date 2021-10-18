@@ -54,7 +54,9 @@ async function GetCovidStats(country) {
     
                 //Set period to 2 weeks
                 document.querySelector("[data-per='LAST_14_DAYS']").click();
-                await new Promise(resolve => setTimeout(resolve, 1000));
+		document.querySelector("[data-per='LAST_14_DAYS']").click();
+		document.querySelector("[data-per='LAST_14_DAYS']").click();
+                await new Promise(resolve => setTimeout(resolve, 5000));
     
                 //Take screenshot of graph
                 var script = document.createElement("script");
