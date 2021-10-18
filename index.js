@@ -47,11 +47,11 @@ async function GetCovidStats(country) {
         try {
             document.querySelectorAll(".jyfHyd")[1].click();
             await new Promise(resolve => setTimeout(resolve, 500));
-            //document.querySelectorAll('.AlKDIb')[1].click();
-            //await new Promise(resolve => setTimeout(resolve, 500));
-            //document.querySelectorAll(".UbwB7c")[1].focus();
-            //await new Promise(resolve => setTimeout(resolve, 500));
-            //document.execCommand("insertText", false, country);
+            document.querySelectorAll('.AlKDIb')[1].click();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            document.querySelectorAll(".UbwB7c")[1].focus();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            document.execCommand("insertText", false, country);
             //await new Promise(resolve => setTimeout(resolve, 500));
             //var element = document.querySelectorAll("div.D51jpe.hzhyof:not([style='display: none;']")[0];
             //if (element.getAttribute("data-ddt") == "CONFIRMED_CASES") { return "CONFIRMED_CASES"; }
