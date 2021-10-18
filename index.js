@@ -47,16 +47,16 @@ async function GetCovidStats(country) {
             try {    
                 //Agree to terms
                 document.querySelectorAll(".jyfHyd")[1].click();
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 1000));
 
                 //Return if no graph found
                 if (!document.querySelector(".PDn9ad.iiUHhf")) { resolve("No graph"); }
     
                 //Set period to 2 weeks
                 document.querySelector("[data-per='LAST_14_DAYS']").click();
-		document.querySelector("[data-per='LAST_14_DAYS']").click();
-		document.querySelector("[data-per='LAST_14_DAYS']").click();
-                await new Promise(resolve => setTimeout(resolve, 5000));
+                while (!document.querySelector("[data-per='LAST_14_DAYS']").classList.contains("PstjFd")) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                }
     
                 //Take screenshot of graph
                 var script = document.createElement("script");
