@@ -34,7 +34,7 @@ async function GetCovidStats(country) {
             //"--no-zygote",
         ],
         defaultViewport: null,
-        headless: false,
+        headless: true,
     });
 
     const page = await browser.newPage();
