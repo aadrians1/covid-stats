@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const imgur = require('imgur');
-const canvas = require('canvas');
+const Canvas = require('canvas');
 
 
 
