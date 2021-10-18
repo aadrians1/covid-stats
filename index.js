@@ -41,38 +41,37 @@ async function GetCovidStats(country) {
     const page = await browser.newPage();
     await page.setExtraHTTPHeaders({'Accept-Language': 'en-GB'});
     await goto(page, `https://www.google.com/search?q=covid+statistics+${country}`);
-    await Wait(1000);
+    await Wait(2000);
 
     var result = await page.evaluate(async function() {
-        try {
-            //Return if no graph found
-            if (!document.querySelector(".PDn9ad.iiUHhf")) { return "No graph"; }
-
-            //Agree to terms
-            document.querySelectorAll(".jyfHyd")[1].click();
-            await new Promise(resolve => setTimeout(resolve, 500));
-
-            //Set period to 2 week
-            document.querySelector("[data-per='LAST_14_DAYS']").click();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            //Take screenshot of graph
-            var script = document.createElement("script");
-            var base64 = null;
-
-            script.onload = function () {
-                html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
-                    base64 = canvas.toDataURL("image/png");
-                });
-            };
-
-            script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
-            document.head.appendChild(script);
-            while (base64 == null) { await new Promise(resolve => setTimeout(resolve, 5)); }
-            return base64;
-        } catch (e) {
-            return "error";
-        }
+        return await new Promise(async resolve => {
+            try {
+                //Return if no graph found
+                if (!document.querySelector(".PDn9ad.iiUHhf")) { resolve("No graph"); }
+    
+                //Agree to terms
+                document.querySelectorAll(".jyfHyd")[1].click();
+                await new Promise(resolve => setTimeout(resolve, 500));
+    
+                //Set period to 2 weeks
+                document.querySelector("[data-per='LAST_14_DAYS']").click();
+                await new Promise(resolve => setTimeout(resolve, 1000));
+    
+                //Take screenshot of graph
+                var script = document.createElement("script");
+    
+                script.onload = function () {
+                    html2canvas(document.querySelector(".PDn9ad.iiUHhf")).then(canvas => {
+                        resolve(canvas.toDataURL("image/png"));
+                    });
+                };
+    
+                script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+                document.head.appendChild(script);
+            } catch (e) {
+                return resolve("error");
+            }
+        });
     });
 
     await browser.close();
