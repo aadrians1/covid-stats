@@ -1,0 +1,15 @@
+{
+  "name": "covid-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "WobbyChip",
+  "license": "ISC",
+  "dependencies": {
+    "got": "^11.8.2",
+    "puppeteer": "^10.4.0"
+  }
+}
